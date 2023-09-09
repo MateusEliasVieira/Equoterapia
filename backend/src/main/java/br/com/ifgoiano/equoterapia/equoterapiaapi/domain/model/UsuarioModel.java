@@ -3,9 +3,9 @@ package br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.enums.EstadoCivil;
-import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.enums.TipoAcesso;
-import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.enums.Vinculo;
+import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.enums.EstadoCivil;
+import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.enums.TipoAcesso;
+import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.enums.Vinculo;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,13 +18,13 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_funcionario")
-public class Fucionario implements Serializable {
+public class UsuarioModel implements Serializable {
 
 	private static final long serialVersionUID = 6423597220827337139L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idFuncionario;
+	private Long idUsuario;
 	@NotNull
 	@NotEmpty
 	private String nome;
@@ -77,11 +77,11 @@ public class Fucionario implements Serializable {
 	private TipoAcesso tipoAcesso;
 
 	public Long getIdFuncionario() {
-		return idFuncionario;
+		return idUsuario;
 	}
 
 	public void setIdFuncionario(Long idFuncionario) {
-		this.idFuncionario = idFuncionario;
+		this.idUsuario = idFuncionario;
 	}
 
 	public String getNome() {
