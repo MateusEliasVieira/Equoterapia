@@ -12,4 +12,5 @@ public interface UsuarioService {
 	public Optional<UsuarioModel> listarFuncionarioPorId(Long idFuncionario);
 	public UsuarioModel atualizar(UsuarioModel usuarioModel);
 	public boolean deletarPorId(Long idFuncionario);
+	public boolean login(UsuarioModel usuarioModel);
 }

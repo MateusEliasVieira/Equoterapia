@@ -3,12 +3,16 @@ package br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.enums.EstadoCivil;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.enums.TipoAcesso;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.enums.Vinculo;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,7 +21,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "tb_funcionario")
+@Table(name = "tb_usuario")
 public class UsuarioModel implements Serializable {
 
 	private static final long serialVersionUID = 6423597220827337139L;
@@ -29,13 +33,13 @@ public class UsuarioModel implements Serializable {
 	@NotEmpty
 	private String nome;
 	@NotNull
-	@NotEmpty
+	@DateTimeFormat
 	private Date dataNascimento;
 	@NotNull
 	@NotEmpty
 	private String cpf;
 	@NotNull
-	@NotEmpty
+	@Enumerated(EnumType.STRING)
 	private EstadoCivil estadoCivil;
 	@NotNull
 	@NotEmpty
@@ -47,7 +51,7 @@ public class UsuarioModel implements Serializable {
 	@NotEmpty
 	private String bairro;
 	@NotNull
-	@NotEmpty
+	@Enumerated(EnumType.STRING)
 	private Vinculo vinculo;
 	@NotNull
 	private boolean possuiTreinamentoDeEquoterapia;
@@ -61,7 +65,7 @@ public class UsuarioModel implements Serializable {
 	@NotNull
 	@NotEmpty
 	private String celular;
-	@Column(length = 20)
+	@Column(length = 20, unique = true)
 	@NotNull
 	@NotEmpty
 	private String usuario;
@@ -73,15 +77,15 @@ public class UsuarioModel implements Serializable {
 	@Nullable
 	private String foto;
 	@NotNull
-	@NotEmpty
+	@Enumerated(EnumType.STRING)
 	private TipoAcesso tipoAcesso;
 
-	public Long getIdFuncionario() {
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdFuncionario(Long idFuncionario) {
-		this.idUsuario = idFuncionario;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {

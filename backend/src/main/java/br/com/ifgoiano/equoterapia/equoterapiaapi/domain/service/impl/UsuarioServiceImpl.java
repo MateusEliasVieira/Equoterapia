@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.UsuarioModel;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.repository.UsuarioRepository;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.service.UsuarioService;
 
+@Service
 public class UsuarioServiceImpl implements UsuarioService{
 	
 	@Autowired
@@ -51,6 +53,12 @@ public class UsuarioServiceImpl implements UsuarioService{
 	    } else {
 	        return false;
 	    }
+	}
+
+	@Override
+	public boolean login(UsuarioModel usuarioModel) {
+		return usuarioRepository.
+				buscarUsuarioSenha(usuarioModel.getUsuario(),usuarioModel.getSenha()) != null ? true : false;
 	}
 
 

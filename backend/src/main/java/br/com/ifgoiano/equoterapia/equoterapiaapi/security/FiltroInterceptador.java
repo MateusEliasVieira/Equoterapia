@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.UsuarioModel;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +21,12 @@ public class FiltroInterceptador extends OncePerRequestFilter {
 		Authentication authentication = null;
 		
 		try {
+			UsuarioModel usuario = new UsuarioModel();
+			usuario.setIdUsuario(1L);
+			usuario.setNome("Mateus");
+			
+			String token = TokenUtil.obterToken(usuario);
+			System.out.println(token);
 			authentication = TokenUtil.obterAuthentication(request);
 		} catch (Exception e) {
 			System.out.println("Erro = " + e.getMessage());

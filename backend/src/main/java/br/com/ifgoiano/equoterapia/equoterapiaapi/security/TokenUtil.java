@@ -19,17 +19,19 @@ public class TokenUtil {
 	private static final String EMISSOR = "mateusdev";
 	private static final String TOKEN_KEY = "01234567890123456789012345678901"; // Chave deve ter 256 bits, nesse caso
 																				// 32 caracteres, para a criptografia
-	private static final long MINUTOS = 1;
+	private static final long MINUTOS = 10;
 
 	public static String obterToken(UsuarioModel usuarioModel) {
+		
+		System.out.println("Sujeito para o token = "+usuarioModel.getUsuario());
 
-		String token = JWT.create().withSubject(usuarioModel.getNome()) // (Payload) define para quem é esse token
+		String token = JWT.create().withSubject(usuarioModel.getUsuario()) // (Payload) define para quem é esse token
 																		// (Sujeito)
 				.withIssuer(EMISSOR) // (Payload) minha referencia (Emissor)
 				.withExpiresAt(LocalDateTime.now().plusMinutes(MINUTOS).toInstant(ZoneOffset.of("-03:00"))) // (Payload)
 																											// validade
 																											// do token
-				.withClaim("id", usuarioModel.getIdFuncionario()) // (Payload) id do usuário
+				.withClaim("usuario", usuarioModel.getUsuario()) // (Payload) id do usuário
 				.sign(Algorithm.HMAC256(TOKEN_KEY.getBytes())); // (Signature)
 
 		return token;
@@ -59,9 +61,13 @@ public class TokenUtil {
 				sujeito = decode.getSubject();
 				emissor = decode.getIssuer();
 				validade = decode.getExpiresAt();
-				id = Integer.parseInt(decode.getClaim("id").toString());
+				//id = Integer.parseInt(decode.getClaim("id").toString());
 
-				if (!sujeito.isEmpty() && emissor.equals(EMISSOR) && validade.after(new Date(System.currentTimeMillis()))) {
+				System.out.println("Sujeito "+sujeito);
+				System.out.println("emissor "+emissor);
+				System.out.println("validade "+validade);
+				
+				if ( emissor.equals(EMISSOR) && validade.after(new Date(System.currentTimeMillis()))) {
 
 					// caso a requisição tenha o cabeçalho correto, gero um "token interno"
 					UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken("user", null,
