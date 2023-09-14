@@ -29,13 +29,15 @@ public class UsuarioController
 	private UsuarioService usuarioService;
 
 	@PostMapping("/novo")
-	public String cadastrar(@RequestBody UsuarioInput usuarioInput) 
+	public ResponseEntity<String> cadastrar(@RequestBody UsuarioInput usuarioInput) 
 	{
 		System.out.println("Bateu aqui");
 		UsuarioModel usuarioModel = modelMapper.map(usuarioInput, UsuarioModel.class);
 		usuarioModel = usuarioService.salvar(usuarioModel);
-		
-		return "Usuario cadastrado";
+		if(usuarioModel != null) {
+			return new ResponseEntity<String>("Usuário cadastrado com sucesso!",HttpStatus.CREATED);
+		}
+		return new ResponseEntity<String>("Erro ao cadastrar novo usuário!",HttpStatus.FORBIDDEN);
 	}
 	
 	@GetMapping("/listar")
