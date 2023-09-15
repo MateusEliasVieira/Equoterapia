@@ -3,11 +3,9 @@ Trabalho de Curso de um Web Service em Spring Boot com arquitetura REST para Equ
 
 ## Tecnologias BackEnd (JAVA - Ecossistema Spring)
 - Spring Boot
-- Spring Web Services
-- Spring Session
+- Spring Web
 - Spring DevTools
 - Spring Data JPA
-- Spring WEB
 - Spring Security
 - Validation
 
