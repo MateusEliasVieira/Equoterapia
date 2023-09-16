@@ -79,6 +79,8 @@ public class UsuarioModel implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoAcesso tipoAcesso;
+	@Column(columnDefinition = "text")
+	private String token;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -214,6 +216,14 @@ public class UsuarioModel implements Serializable {
 
 	public void setTipoAcesso(TipoAcesso tipoAcesso) {
 		this.tipoAcesso = tipoAcesso;
+	}
+	
+	public String getToken() {
+		return token;
+	}
+	
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	/*

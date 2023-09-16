@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.TokenInput;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.UsuarioInput;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.UsuarioOutput;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.UsuarioModel;
@@ -52,5 +53,13 @@ public class UsuarioController
 		}
 		
 		return new ResponseEntity<List<UsuarioOutput>>(listUsuarioOutput,HttpStatus.OK);
+	}
+	
+	@PostMapping("/listar/token")
+	public ResponseEntity<UsuarioOutput> listarPorToken(@RequestBody TokenInput tokenInput){
+		System.out.println("chegou");
+		UsuarioModel usuarioModel = usuarioService.listarUsuarioPorToken(tokenInput.getToken());
+		UsuarioOutput usuarioOutput = modelMapper.map(usuarioModel, UsuarioOutput.class);
+		return new ResponseEntity<UsuarioOutput>(usuarioOutput, HttpStatus.OK);					
 	}
 }

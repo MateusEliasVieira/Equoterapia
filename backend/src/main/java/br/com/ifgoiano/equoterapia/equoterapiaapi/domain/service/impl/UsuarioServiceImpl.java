@@ -34,7 +34,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 
 	@Override
-	public Optional<UsuarioModel> listarUsuariosPorId(Long idFuncionario) {
+	public Optional<UsuarioModel> listarUsuarioPorId(Long idFuncionario) {
 		Optional<UsuarioModel> optional = usuarioRepository.findById(idFuncionario);
 		return optional;
 	}
@@ -46,7 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public boolean deletarPorId(Long idFuncionario) {
-	    Optional<UsuarioModel> funcionarioOptional = listarUsuariosPorId(idFuncionario);   
+	    Optional<UsuarioModel> funcionarioOptional = listarUsuarioPorId(idFuncionario);   
 	    if (funcionarioOptional.isPresent()) {
 	        usuarioRepository.deleteById(idFuncionario);
 	        return true;
@@ -60,6 +60,18 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return usuarioRepository.
 				buscarUsuarioSenha(usuarioModel.getUsuario(),usuarioModel.getSenha());
 		
+	}
+
+	@Override
+	public void salvarToken(String token, String usuario) {
+		usuarioRepository.atualizarTokenUsuario(token, usuario);
+		
+	}
+
+	@Override
+	public UsuarioModel listarUsuarioPorToken(String token) {
+		UsuarioModel usuarioModel = usuarioRepository.buscarPorToken(token);
+		return usuarioModel;
 	}
 
 

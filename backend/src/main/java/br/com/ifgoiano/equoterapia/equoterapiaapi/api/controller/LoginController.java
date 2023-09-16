@@ -29,15 +29,18 @@ public class LoginController {
 	@PostMapping("/entrar")
 	public ResponseEntity<String> login(@RequestBody LoginInput loginInput) 
 	{
-		System.out.println("Usuario: "+loginInput.getUsuario()+" e Senha: "+loginInput.getSenha());
+		//System.out.println("Usuario: "+loginInput.getUsuario()+" e Senha: "+loginInput.getSenha());
 		UsuarioModel usuarioModel = modelMapper.map(loginInput, UsuarioModel.class);
 		UsuarioModel usuarioLogado = usuarioService.login(usuarioModel);
-		//if(usuarioLogado != null) {
+		if(usuarioLogado != null) {
 			// Existe o usuário com usuario e senha
 			UsuarioModel usuario = new UsuarioModel();
 			usuario.setUsuario(usuarioLogado.getUsuario());
 			
 			String token = TokenUtil.obterToken(usuario);
+			
+			usuarioService.salvarToken(token, usuarioLogado.getUsuario());
+			
 			LoginOutput loginOutput = new LoginOutput();
 			loginOutput.setIdUsuario(usuarioLogado.getIdUsuario());
 			loginOutput.setToken(token);
@@ -45,13 +48,11 @@ public class LoginController {
 		
 			Gson gson = new Gson();
 			String json = gson.toJson(loginOutput);
-			
-			System.out.println(loginOutput.toString());
-			
+						
 			return new ResponseEntity<String>(json,HttpStatus.ACCEPTED);	
-		//}
+		}
 	
-		//return new ResponseEntity<String>("Login inválido!",HttpStatus.FORBIDDEN);	
+		return new ResponseEntity<String>("Login inválido!",HttpStatus.FORBIDDEN);	
 	}
 	
 	

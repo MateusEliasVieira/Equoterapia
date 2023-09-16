@@ -19,7 +19,7 @@ public class TokenUtil {
 	private static final String EMISSOR = "mateusdev";
 	private static final String TOKEN_KEY = "01234567890123456789012345678901"; // Chave deve ter 256 bits, nesse caso
 																				// 32 caracteres, para a criptografia
-	private static final long MINUTOS = 10;
+	private static final long MINUTOS = 60;
 
 	public static String obterToken(UsuarioModel usuarioModel) {
 		

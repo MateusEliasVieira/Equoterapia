@@ -23,6 +23,7 @@ public class UsuarioOutput {
 	private String celular;
 	private String foto;
 	private TipoAcesso tipoAcesso;
+	private String token;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -142,6 +143,14 @@ public class UsuarioOutput {
 
 	public void setTipoAcesso(TipoAcesso tipoAcesso) {
 		this.tipoAcesso = tipoAcesso;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }
