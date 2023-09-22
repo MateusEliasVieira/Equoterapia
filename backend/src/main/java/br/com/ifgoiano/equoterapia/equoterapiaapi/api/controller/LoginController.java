@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.ExceptionMessage;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.LoginInput;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.LoginOutput;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.UsuarioModel;
@@ -51,8 +52,8 @@ public class LoginController {
 						
 			return new ResponseEntity<String>(json,HttpStatus.ACCEPTED);	
 		}
-	
-		return new ResponseEntity<String>("Login inválido!",HttpStatus.FORBIDDEN);	
+		String json = new Gson().toJson(new ExceptionMessage("Login inválido"));
+		return new ResponseEntity<String>(json,HttpStatus.FORBIDDEN);	
 	}
 	
 	

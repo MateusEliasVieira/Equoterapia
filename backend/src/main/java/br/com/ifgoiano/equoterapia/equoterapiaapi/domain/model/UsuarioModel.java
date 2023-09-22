@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.enums.EstadoCivil;
 import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.enums.TipoAcesso;
@@ -33,7 +34,7 @@ public class UsuarioModel implements Serializable {
 	@NotEmpty
 	private String nome;
 	@NotNull
-	@DateTimeFormat
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date dataNascimento;
 	@NotNull
 	@NotEmpty
