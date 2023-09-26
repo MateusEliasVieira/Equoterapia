@@ -1,5 +1,6 @@
 package br.com.ifgoiano.equoterapia.equoterapiaapi.domain.service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,7 @@ import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.UsuarioModel;
 
 public interface UsuarioService {
 	
-	public UsuarioModel salvar(UsuarioModel usuarioModel);
+	public UsuarioModel salvar(UsuarioModel usuarioModel) throws Exception, SQLIntegrityConstraintViolationException;
 	public List<UsuarioModel> listarTodosUsuarios();
 	public Optional<UsuarioModel> listarUsuarioPorId(Long idFuncionario);
 	public UsuarioModel listarUsuarioPorToken(String token);

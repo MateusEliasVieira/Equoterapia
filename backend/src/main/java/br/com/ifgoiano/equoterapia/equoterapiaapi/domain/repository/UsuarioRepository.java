@@ -23,4 +23,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long> {
 	@Query("SELECT u FROM UsuarioModel u WHERE u.token = :token")
 	public UsuarioModel buscarPorToken(@Param("token") String token);
 
+	@Query("SELECT u FROM UsuarioModel u WHERE u.usuario = :usuario")
+	public UsuarioModel buscarPorNomeDeUsuario(@Param("usuario") String usuario);
+
 }

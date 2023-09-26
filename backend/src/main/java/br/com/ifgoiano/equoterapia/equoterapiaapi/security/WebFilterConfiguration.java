@@ -56,8 +56,11 @@ public class WebFilterConfiguration {
 		
 		http.csrf((csrf) -> csrf.disable());
 
-		http.authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST, "/login/entrar").permitAll()
-				.requestMatchers(HttpMethod.POST, "/usuario/novo").permitAll().anyRequest().authenticated());
+		http.authorizeHttpRequests((auth) -> auth
+				.requestMatchers(HttpMethod.POST, "/login/entrar").permitAll()
+				.requestMatchers(HttpMethod.POST, "/login/registrar").permitAll()
+				.requestMatchers(HttpMethod.POST, "/usuario/novo").permitAll()
+				.anyRequest().authenticated());
 
 		// A classe UsernamePasswordAuthenticationFilter vai obter a authenticação (caso
 		// exista) do contexto de segurança do spring security
