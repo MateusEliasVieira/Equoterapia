@@ -14,8 +14,8 @@ public class RegistroServiceImpl implements RegistroService{
 	private RegistroRepository registroRepository;
 	
 	@Override
-	public void salvar(RegistroModel registroModel) {
-		registroRepository.save(registroModel);
+	public RegistroModel salvar(RegistroModel registroModel) {
+		return registroRepository.save(registroModel);
 	}
 
 }

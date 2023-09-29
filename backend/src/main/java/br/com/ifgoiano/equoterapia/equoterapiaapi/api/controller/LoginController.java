@@ -1,6 +1,9 @@
 package br.com.ifgoiano.equoterapia.equoterapiaapi.api.controller;
 
 import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifgoiano.equoterapia.equoterapiaapi.api.model.LoginInput;
@@ -59,19 +63,17 @@ public class LoginController {
 	}
 	
 	@PostMapping("/registrar")
+	@ResponseBody
 	public HttpStatus registro(@RequestBody RegistroInput registroInput, HttpServletRequest http) 
 	{
-		System.out.println("entrou aqui");
 		RegistroModel registroModel = modelMapper.map(registroInput, RegistroModel.class);
 		registroModel.setSistemaOperacional(http.getHeader("User-Agent")); // sistema operacional do cliente
-		registroModel.setBloqueado(true);
 		registroModel.setDataRegistro(new Date());
 		registroModel.setIpUsuario(http.getRemoteAddr()); //ip do cliente 
-		registroModel.setAcessoLiberado(Date.from(Instant.now().plus(30, ChronoUnit.MINUTES))); // pega a data e hora atual e acrescenta mais 30 minutos
-		
-		registroService.salvar(registroModel);
-		
-		return HttpStatus.OK;
+				
+		registroService.salvar(registroModel); // salvamos o registro
+	
+		return HttpStatus.CREATED;
 	}
 	
 	

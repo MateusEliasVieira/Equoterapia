@@ -23,8 +23,6 @@ public class RegistroModel implements Serializable{
 	private String senha; // senha que o usuário digitou
 	private String ipUsuario; // ip do dispositivo que acessou
 	private String sistemaOperacional; // sistema operacional do dispositivo que acessou
-	private boolean bloqueado; // T ou F se o usuário está bloqueado
-	private Date acessoLiberado; // quando o usuário poderá acessar novamente
 
 	public Long getIdRegistro() {
 		return idRegistro;
@@ -72,22 +70,6 @@ public class RegistroModel implements Serializable{
 
 	public void setSistemaOperacional(String sistemaOperacional) {
 		this.sistemaOperacional = sistemaOperacional;
-	}
-
-	public boolean isBloqueado() {
-		return bloqueado;
-	}
-
-	public void setBloqueado(boolean bloqueado) {
-		this.bloqueado = bloqueado;
-	}
-
-	public Date getAcessoLiberado() {
-		return acessoLiberado;
-	}
-
-	public void setAcessoLiberado(Date acessoLiberado) {
-		this.acessoLiberado = acessoLiberado;
 	}
 
 }

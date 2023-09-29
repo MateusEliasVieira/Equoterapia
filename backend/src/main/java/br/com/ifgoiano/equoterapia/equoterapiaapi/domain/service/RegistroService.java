@@ -4,5 +4,5 @@ import br.com.ifgoiano.equoterapia.equoterapiaapi.domain.model.RegistroModel;
 
 public interface RegistroService {
 
-	public void salvar(RegistroModel registroModel);
+	public RegistroModel salvar(RegistroModel registroModel);
 }
